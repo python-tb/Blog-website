@@ -115,6 +115,14 @@ USE_I18N = True
 USE_TZ = True
 
 
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*up.railway.app'         # in the quote write your url or base domain| * use for all type supported domain
+]
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
