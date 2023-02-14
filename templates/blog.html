@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-header text-center" style="background-image: url(../static/images/page-header-bg.jpg)">
+    <div class="container">
+        <h1 class="page-title">{{ blog.title }}<span>By - {{ blog.author }}</span></h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+
+<div class="page-content mt-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9">
+                <article class="entry">
+                    <figure class="entry-media">
+                        <a href="single.html">
+                            <img src="{{ blog.imageURL }}" alt="image desc">
+                        </a>
+                    </figure><!-- End .entry-media -->
+
+                    <div class="entry-body">
+                        <div class="entry-meta">
+                            <span class="entry-author">
+                                by <a href="#">{{ blog.author }}</a>
+                            </span>
+                            <span class="meta-separator">|</span>
+                            <a href="#">{{ blog.created_at }}</a>
+                        </div><!-- End .entry-meta -->
+
+                        <div class="entry-cats">
+                            in <a href="#">{{ blog.category }}</a>
+                        </div><!-- End .entry-cats -->
+
+                        <div class="entry-content">
+                            <p>
+                                {{ blog.description }}
+                            </p>
+                        </div><!-- End .entry-content -->
+                    </div><!-- End .entry-body -->
+                </article><!-- End .entry -->
+
+            </div><!-- End .col-lg-9 -->
+
+            <aside class="col-lg-3">
+                <div class="sidebar">
+
+                    <div class="widget widget-cats">
+                        <h3 class="widget-title">Categories</h3><!-- End .widget-title -->
+
+                        <ul>
+                            {% for category in categories %}
+                            <li><a href="/category/{{ category.id }}">{{ category.name }}<span>{{ category.cat_count }}</span></a></li>
+                            {% endfor %}
+                        </ul>
+                    </div><!-- End .widget -->
+
+                    <div class="widget">
+                        <h3 class="widget-title">Popular Posts</h3><!-- End .widget-title -->
+
+                        <ul class="posts-list">
+                            {% for blog in all_blogs %}
+                            <li>
+                                <figure>
+                                    <a href="/blog/{{ blog.id }}">
+                                        <img src="{{ blog.imageURL }}" alt="post">
+                                    </a>
+                                </figure>
+
+                                <div>
+                                    <span>{{ blog.created_at }}</span>
+                                    <h4><a href="/blog/{{ blog.id }}">{{ blog.title }}</a></h4>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul><!-- End .posts-list -->
+                    </div><!-- End .widget -->
+                </div><!-- End .sidebar -->
+            </aside><!-- End .col-lg-3 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
+{% endblock %}

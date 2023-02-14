@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-header text-center" style="background-image: url(../static/images/page-header-bg.jpg)">
+    <div class="container">
+        <h1 class="page-title">Welcome to Blog Website<span>Blog</span></h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<div class="page-content">
+    <div class="container">
+        <nav class="blog-nav">
+            <ul class="menu-cat entry-filter justify-content-center">
+                <li class="active"><a href="/" data-filter="*">All Blog Posts<span>12</span></a></li>
+                {% for category in categories %}
+                <li><a href="/category/{{ category.id }}" data-filter=".lifestyle">{{ category.name }}<span>{{ category.cat_count }}</span></a></li>
+                {% endfor %}
+            </ul><!-- End .blog-menu -->
+        </nav><!-- End .blog-nav -->
+
+        <div class="entry-container max-col-2" data-layout="fitRows">
+            {% for blog in blogs reversed %}
+            <div class="entry-item lifestyle shopping col-sm-6">
+                <article class="entry entry-grid text-center">
+                    <figure class="entry-media">
+                        <a href="single.html">
+                            <img src="{{ blog.imageURL }}" alt="image desc">
+                        </a>
+                    </figure><!-- End .entry-media -->
+
+                    <div class="entry-body">
+                        <div class="entry-meta">
+                            <span class="entry-author">
+                                by <a href="#">{{ blog.author }}</a>
+                            </span>
+                            <span class="meta-separator">|</span>
+                            <a href="#">{{ blog.created_at }}</a>
+                        </div><!-- End .entry-meta -->
+
+                        <h2 class="entry-title">
+                            <a href="/blog/{{ blog.id }}">{{ blog.title | truncatewords:7 }}</a>
+                        </h2><!-- End .entry-title -->
+
+                        <div class="entry-cats">
+                            in <a href="#">{{ blog.category }}</a>
+                        </div><!-- End .entry-cats -->
+
+                        <div class="entry-content">
+                            <p>
+                                {{ blog.description | truncatewords:25 }}
+                            </p>
+                            <a href="/blog/{{ blog.id }}" class="read-more">Continue Reading</a>
+                        </div><!-- End .entry-content -->
+                    </div><!-- End .entry-body -->
+                </article><!-- End .entry -->
+            </div><!-- End .entry-item -->
+            {% endfor %}
+        </div><!-- End .container -->
+    </div><!-- End .page-content -->
+
+    {% endblock %}
