@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ont0feh@v9*7sip1#k=#y1vxpi#@bk##=^o)@!)k$_-m1kdz86
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -119,6 +120,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')       # for deploy point of view
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"  # for server of staticfile tp whitenoise
+
+
 
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'uploads'))
 MEDIA_URL = '/uploads/' 
